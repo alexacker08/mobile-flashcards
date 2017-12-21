@@ -5,12 +5,12 @@ var initialCards = {
     title: 'React',
     questions: [
       {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
+        question: 'React is a library for managing user interfaces.',
+        answer: 'Correct'
       },
       {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
+        question: 'You make Ajax requests in the shouldComponentUpdate event.',
+        answer: 'Incorrect'
       }
     ]
   },
@@ -18,8 +18,8 @@ var initialCards = {
     title: 'JavaScript',
     questions: [
       {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        question: 'A closure is the combination of a function and lexical environment what that function was declared.',
+        answer: 'Correct'
       }
     ]
   }

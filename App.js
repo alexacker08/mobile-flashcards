@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Quiz from './component/Quiz';
 import Deck from './component/Deck';
 import NewDeck from './component/NewDeck';
+import IndvDeck from './component/IndvDeck';
 import Question from './component/NewQuestion';
+import Answer from './component/Answer';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
@@ -20,20 +22,17 @@ const Tabs = TabNavigator({
       tabBarLabel:"Decks"
     }
   },
-  Quiz:{
+  NewDeck:{
     screen: NewDeck,
     navigationOptions: {
       tabBarLabel:"New Deck"
     }
   },
 }, {
-  navigationOptions: {
-    header: null
-  },
   tabBarOptions: {
     activeTintColor: purple,
     style: {
-      height: 36,
+      height: 60,
       backgroundColor: white,
       shadowColor: 'rgba(0,0,0,0.24)',
       shadowOffset: {
@@ -41,14 +40,37 @@ const Tabs = TabNavigator({
         height: 3
       },
       shadowRadius: 6,
-      shadowOpacity: 1
-    }
-  }
+      shadowOpacity: 1,
+      justifyContent:'center',
+      alignItems:'center'
+    },
+    labelStyle:{
+        fontSize: 16,
+        paddingBottom: 10
+    },
+  },
+  swipeEnabled:true,
+  animationEnabled:true
 })
 
 const MainNavigator = StackNavigator({
   Home:{
-    screen: Tabs
+    screen: Tabs,
+  },
+  NewDeck:{
+    screen: NewDeck
+  },
+  IndvDeck:{
+    screen: IndvDeck
+  },
+  Quiz:{
+    screen: Quiz
+  },
+  Answer:{
+    screen: Answer
+  },
+  Question:{
+    screen: Question
   }
 })
 
@@ -57,7 +79,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View style={{flex: 1,paddingTop:45}}>
+        <View style={{flex: 1}}>
           <MainNavigator />
         </View>
       </Provider>

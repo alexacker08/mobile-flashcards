@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
 
-function CardTest(props){
-	console.log(props)
+function Card(props){
+  const navigate = props.navoptions.navigate
+  const cardselect = props.card
   return (
     <View style={styles.card}>
-      <TouchableOpacity onPress={() => {}}>
-      	<Text style={styles.cardText}>{props.name}</Text>
+      <TouchableOpacity onPress={() => navigate('IndvDeck',{card:cardselect})}>
+      	<Text style={styles.cardText}>{props.card.title}</Text>
       </TouchableOpacity>
     </View>
   )
@@ -16,15 +17,18 @@ function CardTest(props){
 
 class Deck extends React.Component {
 
+  static navigationOptions = {
+  	title:'Your Study Cards'
+  }
+
   render() {
     const navigate = this.props.navigation;
-    console.log(navigate);
     return (
         <View style={{flex: 1}}>
           <ScrollView>
             {this.props.cards.map((card) => {
             	return (
-            		<CardTest key={card.title} name={card.title}/>
+            		<Card key={card.title} card={card} navoptions={navigate}/>
             	)
             })}
           </ScrollView>
@@ -32,6 +36,7 @@ class Deck extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   card: {
