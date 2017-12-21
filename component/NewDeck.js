@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {addCard} from '../actions';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity,TextInput } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
 
@@ -8,6 +9,22 @@ class NewDeck extends React.Component {
 		super(props);
 		this.state = {
 			text: ''
+		}
+	}
+
+	handleSubmit = () => {
+		const cardObj = this.objectBuilder()
+		this.props.addCard(cardObj)
+		this.props.toCard(cardObj[this.state.text])
+		this.setState({text:''})
+	}
+
+	objectBuilder = () => {
+		return {
+			[this.state.text]:{
+				title:this.state.text,
+				questions:[]
+			}
 		}
 	}
 
@@ -20,7 +37,9 @@ class NewDeck extends React.Component {
 					placeholder="Enter title here"
 					onChangeText={(text) => this.setState({text})}
 				/>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={this.handleSubmit}
+				>
 					<Text style={styles.button}>Submit</Text>
 				</TouchableOpacity>
 			</View>
@@ -56,10 +75,11 @@ const styles = StyleSheet.create({
 	}
 })
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch,{navigation}){
 	return {
-
+		addCard:(card) => dispatch(addCard(card)),
+		toCard:({questions,title}) => navigation.navigate('Question',{questions,title})
 	}
 }
 
-export default connect(mapDispatchToProps)(NewDeck)
+export default connect(null,mapDispatchToProps)(NewDeck)

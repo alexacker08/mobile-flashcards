@@ -7,11 +7,12 @@ import {purple,blue,white} from '../utils/colors';
 class NewDeck extends React.Component {
 	render(){
 		const {navigation} = this.props
-		const {card} = navigation.state.params;
+		const {card} = navigation.state.params
+		const activeCard = this.props.cards[card.title]
 		return (
 			<View style={{flex: 1,backgroundColor:white,justifyContent:'center'}}>
-				<Text style={styles.title}>{card.title}</Text>
-				<Text style={{textAlign:'center'}}>{card.questions.length}{card.questions.length > 1 ? ' cards' : ' card'}</Text>
+				<Text style={styles.title}>{activeCard.title}</Text>
+				<Text style={{textAlign:'center'}}>{activeCard.questions.length}{activeCard.questions.length > 1 ? ' cards' : ' card'}</Text>
 				<TouchableOpacity
 					style={styles.button}
 					onPress={() => navigation.navigate('Question',card)}
@@ -56,4 +57,10 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default NewDeck
+function mapStateToProps(state){
+	return {
+		cards:state
+	}
+}
+
+export default connect(mapStateToProps)(NewDeck)

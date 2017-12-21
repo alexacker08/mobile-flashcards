@@ -1,4 +1,4 @@
-import {ADD_CARD,EDIT_CARD} from '../actions'
+import {ADD_CARD,EDIT_CARD,ADD_QUESTION} from '../actions'
 
 var initialCards = {
   React: {
@@ -30,10 +30,20 @@ function cards(state = initialCards, action){
 		case ADD_CARD:
 			return {
 				...state,
+        ...action.card
 			}
 		case EDIT_CARD:
 			return {
-				...state
+				...state,
+			}
+		case ADD_QUESTION:
+      console.log(action)
+			return {
+				...state,
+				[action.title]:{
+					...state[action.title],
+					questions: action.question
+				}
 			}
 		default:
 			return state
