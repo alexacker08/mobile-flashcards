@@ -15,28 +15,27 @@ class Question extends React.Component {
 		}
 	}
 
-	componentDidMount(){
-		const cardTitle = this.props.navigation.state.params.title
-		const cards = this.props.state.cards
-	}
-
 	_submitQuestion = (answer) => {
 		const currentQuestions = this.props.questionList
 		const newDeck = currentQuestions.length === 0 ? true : false
 		const cardTitle = this.props.navigation.state.params.title
 
+		//Builds new Question object that will be added to question array below
 		const newQuestion = {
 			question: this.state.text,
 			answer
 		}
+
+		//Add new question to previous question array
 		currentQuestions.push(newQuestion)
 
-		//Dispatch action here
+		//Update Storage and Store here
 		saveDeck(cardTitle,currentQuestions).then(() => {
 			this.props.dispatch(addDeck(cardTitle,currentQuestions))
 			this._backtoCards(this.props.state.cards[cardTitle])
 		})
 	}
+	//Sends user back to initial card screen after question is submitted
 	_backtoCards = (card) => {
 		const resetAction = NavigationActions.reset({
 			index: 1,
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		width: 250,
 		alignSelf:'center',
+		textAlign:'center',
 		fontSize: 18,
 		borderRadius: 4,
 		borderColor: '#ccc',
@@ -125,9 +125,6 @@ function mapStateToProps(state, {navigation}){
 
 function mapDispatchToProps(dispatch,{navigation}){
 	return {
-		addQuestion:(title,newQuestions) => dispatch(addQuestion(title,newQuestions)),
-		//addQuestion:() => console.log('ADDING QUESTION'),
-		goBack:() => navigation.goBack(),
 		dispatch:dispatch
 	}
 }

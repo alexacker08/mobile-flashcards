@@ -12,10 +12,11 @@ class Answer extends React.Component {
   	}
 
   	componentDidMount(){
+  		//Clear the current notification schedule, and schedule the next one out
   		clearLocalNotification().then(setLocalNotification)
-
   	}
 
+  	//Sends user back to the initial CART screen
 	_backtoHome = (card) => {
 		const resetAction = NavigationActions.reset({
 			index:1,
@@ -26,6 +27,7 @@ class Answer extends React.Component {
 		});
 		this.props.navigation.dispatch(resetAction)
 	}
+	//Sends users back to the quiz that were on from the beginning
 	_backtoCards = (card) => {
 		const resetAction = NavigationActions.reset({
 			index: 2,

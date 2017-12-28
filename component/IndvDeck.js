@@ -8,6 +8,7 @@ import {FontAwesome, Ionicons} from '@expo/vector-icons';
 
 class IndvDeck extends React.Component {
 
+	//Activates a deletion of the Deck and a route back to the Home tab
 	_deleteDeck(){
 		const title = this.props.card.title
 		this.props.dispatch(deletingCard(title))

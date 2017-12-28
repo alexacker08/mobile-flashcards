@@ -6,14 +6,14 @@ import NewDeck from './component/NewDeck';
 import IndvDeck from './component/IndvDeck';
 import Question from './component/NewQuestion';
 import Answer from './component/Answer';
-import {createStore,applyMiddleware,compose} from 'redux';
-import {Provider} from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
-import {TabNavigator,StackNavigator} from 'react-navigation';
-import {purple,blue,white,gray} from './utils/colors';
-import {getDecks,checkKey,DECK_STORAGE_KEY,addData,setLocalNotification} from './utils/helpers';
-import {FontAwesome, Ionicons} from '@expo/vector-icons';
+import {TabNavigator, StackNavigator} from 'react-navigation';
+import {purple, blue, white, gray} from './utils/colors';
+import { getDecks, checkKey, DECK_STORAGE_KEY, addData, setLocalNotification} from './utils/helpers';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 const Tabs = TabNavigator({
   Deck:{
@@ -47,7 +47,7 @@ const Tabs = TabNavigator({
     },
     labelStyle:{
         fontSize: 13,
-        color: purple,
+        color: '#111',
         paddingTop: 5,
         paddingBottom: 5
     },

@@ -6,6 +6,7 @@ const fetch = {
   fetch: false
 }
 
+//Not used now but can be used with any Async integrations to display loading functionality
 function fetching(state = fetch, action){
   switch(action.type){
     case FETCHING:
@@ -18,6 +19,7 @@ function fetching(state = fetch, action){
   }
 }
 
+//Reducer that helps to keep most of the App up to date through the users activity
 function cards(state = {}, action){
 	switch(action.type){
 		case ADD_CARD:

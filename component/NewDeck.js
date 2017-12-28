@@ -23,15 +23,15 @@ class NewDeck extends React.Component {
 		} else {
 			const cardObj = this.deckBuilder()
 			const title = this.state.text
-			const emptyQ = []
-			//this.props.addCard(cardObj)
-			saveDeck(title,emptyQ).then(() => {
+			//Updates storage first with new deck of cards holder and then dispatches to update the store following the promise
+			saveDeck(title,emptyQ = []).then(() => {
 				this.props.dispatch(addCarding(cardObj))
 				this.props.toCard(cardObj[title])
 				this.setState({text:''})
 			})
 		}
 	}
+	//Helps to build the structure of the deck to have submitted to the store and AsyncStorage
 	deckBuilder = () => {
 		return {
 			[this.state.text]:{
@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		paddingLeft: 40,
 		paddingRight: 40,
-		backgroundColor: white
+		backgroundColor: white,
+		textAlign:'center'
 	}
 })
 

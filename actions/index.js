@@ -9,7 +9,6 @@ import {
 	deleteDeckAPI
 } from '../utils/helpers'
 
-
 export const ADD_CARD = 'ADD_CARD'
 export const EDIT_CARD = 'EDIT_CARD'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -24,7 +23,6 @@ export function addCarding(card){
 		fetch:false
 	}
 }
-
 export function addQuestion(title,question){
 	return {
 		type: ADD_QUESTION,
@@ -57,6 +55,8 @@ export function fetchingComp(){
 		fetch: false
 	}
 }
+
+//Pulls the initial Data from Storage and makes updates to the store a long the way
 export function appPull(){
 	return dispatch => {
 		dispatch(fetching())
@@ -76,6 +76,7 @@ export function appPull(){
 	}
 }
 
+//Dispatches deleting decks from the app
 export function deletingCard(title){
 	return dispatch => {
 		deleteDeckAPI(title).then(() => {
@@ -84,6 +85,7 @@ export function deletingCard(title){
 	}
 }
 
+//Assists with adding questions and new decks
 export function addDeck(title,questions){
 	return dispatch => {
 		dispatch(fetching())

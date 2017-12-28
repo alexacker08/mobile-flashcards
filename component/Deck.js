@@ -5,11 +5,12 @@ import {purple,blue,white} from '../utils/colors';
 import {getDecks,checkKey,DECK_STORAGE_KEY,addData,getDeck} from '../utils/helpers';
 import {appPull} from '../actions'
 import Swipeable from 'react-native-swipeable'
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
+//Stateless component that builds the initial card decks
 function Card(props){
   const navigate = props.navoptions.navigate
   const cardselect = props.card
-
   return (
     <View style={styles.card}>
       <TouchableOpacity onPress={() => navigate('IndvDeck',{title:props.card.title})}>
@@ -22,14 +23,13 @@ function Card(props){
 class Deck extends React.Component {
 
   static navigationOptions = {
-  	title:'Your Study Cards'
+  	title:'Your Study Cards',
   }
 
   componentDidMount(){
     this.props.dispatch(appPull())
     //AsyncStorage.clear()
   }
-
 
   render() {
     const navigate = this.props.navigation;
