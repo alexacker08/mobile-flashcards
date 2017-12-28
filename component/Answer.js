@@ -21,21 +21,23 @@ class Answer extends React.Component {
 	}
 	_backtoCards = (card) => {
 		const resetAction = NavigationActions.reset({
-			index: 1,
+			index: 2,
 			actions:[
 				NavigationActions.navigate({routeName:'Home'}),
-				NavigationActions.navigate({routeName:'IndvDeck',params:{card:card}})
+				NavigationActions.navigate({routeName:'IndvDeck',params:{title:card.title}}),
+				NavigationActions.navigate({routeName:'Quiz',params:{card}})
 			]
 		});
 		this.props.navigation.dispatch(resetAction)
 	}
 
 	render(){
-		const {questions,score,card} = this.props.navigation.state.params
+		const {score,card} = this.props.navigation.state.params
+		console.log(card.questions)
 		return(
 			<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-				<Text style={styles.title}>You got {score} {score > 1 ? 'questions' : 'question'} right out of {questions}</Text>
-				<Text style={styles.title}>That comes out to {Math.floor((score/questions) * 100)}%</Text>
+				<Text style={styles.title}>You got {score} {score > 1 ? 'questions' : 'question'} right out of {card.questions.length}</Text>
+				<Text style={styles.title}>That comes out to {Math.floor((score/card.questions.length) * 100)}%</Text>
 				<TouchableOpacity
 					onPress={() => this._backtoCards(card)}
 					style={styles.button}

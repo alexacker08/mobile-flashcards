@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
+import {getDecks,checkKey,DECK_STORAGE_KEY,addData,getDeck} from '../utils/helpers';
+import {appPull} from '../actions'
 
 function Card(props){
   const navigate = props.navoptions.navigate
   const cardselect = props.card
   return (
     <View style={styles.card}>
-      <TouchableOpacity onPress={() => navigate('IndvDeck',{card:cardselect})}>
+      <TouchableOpacity onPress={() => navigate('IndvDeck',{title:props.card.title})}>
       	<Text style={styles.cardText}>{props.card.title}</Text>
       </TouchableOpacity>
     </View>
@@ -21,15 +23,25 @@ class Deck extends React.Component {
   	title:'Your Study Cards'
   }
 
+  componentDidMount(){
+    //appPull()
+    //getDecks().then(result => console.log(JSON.parse(result))
+    this.props.dispatch(appPull())
+    //AsyncStorage.clear()
+  }
+
+
   render() {
     const navigate = this.props.navigation;
     return (
         <View style={{flex: 1}}>
           <ScrollView>
             {this.props.cards.map((card) => {
-            	return (
-            		<Card key={card.title} card={card} navoptions={navigate}/>
-            	)
+            	if(!card.deleted){
+                return (
+                  <Card key={card.title} card={card} navoptions={navigate}/>
+                )
+              }
             })}
           </ScrollView>
         </View>
@@ -60,13 +72,19 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state){
-	return {
-		cards: Object.keys(state).reduce((cardAgg,card) => {
-			var tempCard = state[card];
+  return {
+		cards: Object.keys(state.cards).reduce((cardAgg,card) => {
+			var tempCard = state.cards[card];
 			cardAgg.push(tempCard);
 			return cardAgg
 		},[])
-	}
+  }
 }
 
-export default connect(mapStateToProps)(Deck)
+function mapDispatchToProps(dispatch){
+  return {
+    dispatch:dispatch
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Deck)

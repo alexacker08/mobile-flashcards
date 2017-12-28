@@ -1,31 +1,24 @@
-import {ADD_CARD,EDIT_CARD,ADD_QUESTION} from '../actions'
+import {ADD_CARD,EDIT_CARD,ADD_QUESTION,FETCHING,FETCHING_COMP,DELETE_CARD} from '../actions'
+import {combineReducers} from 'redux';
 
-var initialCards = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'React is a library for managing user interfaces.',
-        answer: 'Correct'
-      },
-      {
-        question: 'You make Ajax requests in the shouldComponentUpdate event.',
-        answer: 'Incorrect'
+
+const fetch = {
+  fetch: false
+}
+
+function fetching(state = fetch, action){
+  switch(action.type){
+    case FETCHING:
+      return {
+        ...state,
+        fetch:action.fetch
       }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'A closure is the combination of a function and lexical environment what that function was declared.',
-        answer: 'Correct'
-      }
-    ]
+    default:
+      return state
   }
 }
 
-function cards(state = initialCards, action){
+function cards(state = {}, action){
 	switch(action.type){
 		case ADD_CARD:
 			return {
@@ -37,7 +30,6 @@ function cards(state = initialCards, action){
 				...state,
 			}
 		case ADD_QUESTION:
-      console.log(action)
 			return {
 				...state,
 				[action.title]:{
@@ -45,9 +37,17 @@ function cards(state = initialCards, action){
 					questions: action.question
 				}
 			}
+    case DELETE_CARD:
+      return {
+        ...state,
+        [action.title]:{
+          ...state[action.title],
+          deleted:true
+        }
+      }
 		default:
 			return state
 	}
 }
 
-export default cards
+export default combineReducers({fetching,cards})

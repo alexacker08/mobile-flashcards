@@ -45,7 +45,6 @@ class Quiz extends React.Component {
 					routeName: 'Answer',
 					params:{
 						score,
-						questions:this.state.numQuestions,
 						card:this.props.navigation.state.params.card
 					}
 				})
@@ -56,13 +55,12 @@ class Quiz extends React.Component {
 
 	componentDidMount(){
 		this.setState({
-			numQuestions:this.props.navigation.state.params.questions.length
+			numQuestions:this.props.navigation.state.params.card.questions.length
 		})
 	}
 
 	render(){
-		const {questions} = this.props.navigation.state.params;
-		console.log(this.props.navigation)
+		const {questions} = this.props.navigation.state.params.card;
 		const qIndex = this.state.questionIndex
 		const answer = questions.length !== this.state.questionIndex ? questions[qIndex].answer : ''
 		const currentQuestion = questions.length !== this.state.questionIndex ? questions[qIndex].question : ''

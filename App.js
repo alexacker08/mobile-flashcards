@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, AsyncStorage } from 'react-native';
 import Quiz from './component/Quiz';
 import Deck from './component/Deck';
 import NewDeck from './component/NewDeck';
 import IndvDeck from './component/IndvDeck';
 import Question from './component/NewQuestion';
 import Answer from './component/Answer';
-import {createStore} from 'redux';
+import {createStore,applyMiddleware,compose} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 import reducer from './reducer';
 import {TabNavigator,StackNavigator} from 'react-navigation';
 import {purple,blue,white} from './utils/colors';
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import {getDecks,checkKey,DECK_STORAGE_KEY,addData} from './utils/helpers';
+import {FontAwesome, Ionicons} from '@expo/vector-icons';
 
 
 
@@ -74,11 +76,16 @@ const MainNavigator = StackNavigator({
   }
 })
 
+
+const middleWare = applyMiddleware(thunk)
+const store = createStore(reducer,compose(middleWare))
+
 export default class App extends React.Component {
+
 
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={{flex: 1}}>
           <MainNavigator />
         </View>

@@ -2,17 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
+import {deletingCard} from '../actions';
 
 
-class NewDeck extends React.Component {
+class IndvDeck extends React.Component {
+
+	_deleteDeck(){
+		const title = this.props.card.title
+		this.props.dispatch(deletingCard(title))
+		this.props.navigation.goBack()
+	}
+
 	render(){
-		const {navigation} = this.props
-		const {card} = navigation.state.params
-		const activeCard = this.props.cards[card.title]
+		const {navigation,card} = this.props
+		console.log(card)
+		const questionsLength = this.props.card.questions.length
 		return (
 			<View style={{flex: 1,backgroundColor:white,justifyContent:'center'}}>
-				<Text style={styles.title}>{activeCard.title}</Text>
-				<Text style={{textAlign:'center'}}>{activeCard.questions.length}{activeCard.questions.length > 1 ? ' cards' : ' card'}</Text>
+				<Text style={styles.title}>{card.title}</Text>
+				<Text style={{textAlign:'center'}}>{questionsLength}{questionsLength > 1 ? ' cards' : ' card'}</Text>
 				<TouchableOpacity
 					style={styles.button}
 					onPress={() => navigation.navigate('Question',card)}
@@ -24,6 +32,12 @@ class NewDeck extends React.Component {
 					onPress={() => navigation.navigate('Quiz',{questions:card.questions,card:card})}
 				>
 					<Text style={{textAlign:'center',color:white}}>Start Quiz</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => this._deleteDeck()}
+				>
+					<Text style={{textAlign:'center',color:white}}>Delete</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -57,10 +71,17 @@ const styles = StyleSheet.create({
 	}
 })
 
-function mapStateToProps(state){
+function mapStateToProps(state,{navigation}){
+	const title = navigation.state.params.title
 	return {
-		cards:state
+		card: state.cards[title]
 	}
 }
 
-export default connect(mapStateToProps)(NewDeck)
+function mapDispatchToProps(dispatch){
+	return {
+		dispatch:dispatch
+	}
+}
+
+export default connect(mapStateToProps)(IndvDeck)

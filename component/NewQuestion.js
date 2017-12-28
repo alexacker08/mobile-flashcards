@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity,TextInput } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
 import {connect} from 'react-redux';
-import {addQuestion} from '../actions';
+import {addDeck,addQuestion} from '../actions';
 import {NavigationActions} from 'react-navigation';
+import {saveDeck} from '../utils/helpers'
 
 class Question extends React.Component {
 
@@ -14,38 +15,43 @@ class Question extends React.Component {
 		}
 	}
 
-	submitQuestion = (answer) => {
+	componentDidMount(){
+		const cardTitle = this.props.navigation.state.params.title
+		const cards = this.props.state.cards
+		console.log(cardTitle)
+		console.log(cards)
+
+	}
+
+	_submitQuestion = (answer) => {
 		const currentQuestions = this.props.questionList
 		const newDeck = currentQuestions.length === 0 ? true : false
 		const cardTitle = this.props.navigation.state.params.title
+
 		const newQuestion = {
 			question: this.state.text,
 			answer
 		}
 		currentQuestions.push(newQuestion)
+
 		//Dispatch action here
-		this.props.addQuestion(cardTitle,currentQuestions)
-		//Send back to IndvCard comp
-		if(newDeck){
-			//this.props.goToCard({card:this.props.state[cardTitle]})
-			this._backtoCards(this.props.state[cardTitle])
-		} else {
-			this.props.goBack()
-		}
+		saveDeck(cardTitle,currentQuestions).then(() => {
+			this.props.dispatch(addDeck(cardTitle,currentQuestions))
+			this._backtoCards(this.props.state.cards[cardTitle])
+		})
 	}
 	_backtoCards = (card) => {
 		const resetAction = NavigationActions.reset({
 			index: 1,
 			actions:[
 				NavigationActions.navigate({routeName:'Home'}),
-				NavigationActions.navigate({routeName:'IndvDeck',params:{card:card}})
+				NavigationActions.navigate({routeName:'IndvDeck',params:{title:card.title}})
 			]
 		});
 		this.props.navigation.dispatch(resetAction)
 	}
 
 	render(){
-		console.log(this.props.navigation.state.params)
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>Add a question to your cards</Text>
@@ -57,13 +63,13 @@ class Question extends React.Component {
 				<View style={{flexDirection:'row',justifyContent:'space-around'}}>
 					<TouchableOpacity
 						style={[styles.button,{marginRight:10}]}
-						onPress={() => this.submitQuestion('Correct')}
+						onPress={() => this._submitQuestion('Correct')}
 					>
 						<Text style={styles.btnText}>Correct</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={[styles.button,{marginLeft:10}]}
-						onPress={() => this.submitQuestion('Incorrect')}
+						onPress={() => this._submitQuestion('Incorrect')}
 					>
 						<Text style={styles.btnText}>Incorrect</Text>
 					</TouchableOpacity>
@@ -124,6 +130,7 @@ function mapDispatchToProps(dispatch,{navigation}){
 		addQuestion:(title,newQuestions) => dispatch(addQuestion(title,newQuestions)),
 		//addQuestion:() => console.log('ADDING QUESTION'),
 		goBack:() => navigation.goBack(),
+		dispatch:dispatch
 	}
 }
 

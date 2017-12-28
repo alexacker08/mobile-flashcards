@@ -1,10 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addCard} from '../actions';
+import {addCard,addDeck,addCarding} from '../actions';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity,TextInput } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
+import {saveDeck} from '../utils/helpers'
 
 class NewDeck extends React.Component {
+
+	static navigationOptions = {
+  		title:'Create a new Deck'
+  	}
+
 	constructor(props){
 		super(props);
 		this.state = {
@@ -13,13 +19,22 @@ class NewDeck extends React.Component {
 	}
 
 	handleSubmit = () => {
-		const cardObj = this.objectBuilder()
-		this.props.addCard(cardObj)
-		this.props.toCard(cardObj[this.state.text])
-		this.setState({text:''})
+		if(this.state.text.length === 0){
+			return
+		} else {
+			const cardObj = this.deckBuilder()
+			const title = this.state.text
+			const emptyQ = []
+			//this.props.addCard(cardObj)
+			saveDeck(title,emptyQ).then(() => {
+				this.props.dispatch(addCarding(cardObj))
+				this.props.toCard(cardObj[title])
+				this.setState({text:''})
+			})
+		}
 	}
 
-	objectBuilder = () => {
+	deckBuilder = () => {
 		return {
 			[this.state.text]:{
 				title:this.state.text,
@@ -75,10 +90,12 @@ const styles = StyleSheet.create({
 	}
 })
 
+
 function mapDispatchToProps(dispatch,{navigation}){
 	return {
-		addCard:(card) => dispatch(addCard(card)),
-		toCard:({questions,title}) => navigation.navigate('Question',{questions,title})
+		//addCard:(card) => dispatch(addCard(card)),
+		toCard:({questions,title}) => navigation.navigate('Question',{questions,title}),
+		dispatch:dispatch
 	}
 }
 
