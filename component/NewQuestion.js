@@ -18,9 +18,6 @@ class Question extends React.Component {
 	componentDidMount(){
 		const cardTitle = this.props.navigation.state.params.title
 		const cards = this.props.state.cards
-		console.log(cardTitle)
-		console.log(cards)
-
 	}
 
 	_submitQuestion = (answer) => {
@@ -93,13 +90,14 @@ const styles = StyleSheet.create({
 	},
 	textInput:{
 		height: 50,
+		width: 250,
 		alignSelf:'center',
 		fontSize: 18,
 		borderRadius: 4,
 		borderColor: '#ccc',
 		borderWidth: 1,
-		paddingLeft: 80,
-		paddingRight: 80,
+		paddingLeft: 40,
+		paddingRight: 40,
 		color: '#000'
 	},
 	button:{

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
-import {purple,blue,white} from '../utils/colors';
+import {purple,blue,white,gray} from '../utils/colors';
 import {deletingCard} from '../actions';
+import {FontAwesome, Ionicons} from '@expo/vector-icons';
 
 
 class IndvDeck extends React.Component {
@@ -15,12 +16,12 @@ class IndvDeck extends React.Component {
 
 	render(){
 		const {navigation,card} = this.props
-		console.log(card)
 		const questionsLength = this.props.card.questions.length
 		return (
 			<View style={{flex: 1,backgroundColor:white,justifyContent:'center'}}>
-				<Text style={styles.title}>{card.title}</Text>
-				<Text style={{textAlign:'center'}}>{questionsLength}{questionsLength > 1 ? ' cards' : ' card'}</Text>
+				<Text style={styles.title}>{card.title} Deck</Text>
+				<FontAwesome style={{alignSelf:'center',marginBottom:20}} name="code" size={40} />
+				<Text style={{textAlign:'center',fontSize: 20}}>{questionsLength}{questionsLength > 1 ? ' cards' : ' card'}</Text>
 				<TouchableOpacity
 					style={styles.button}
 					onPress={() => navigation.navigate('Question',card)}
@@ -34,10 +35,10 @@ class IndvDeck extends React.Component {
 					<Text style={{textAlign:'center',color:white}}>Start Quiz</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					style={styles.button}
+					style={styles.invertBtn}
 					onPress={() => this._deleteDeck()}
 				>
-					<Text style={{textAlign:'center',color:white}}>Delete</Text>
+					<Text style={{textAlign:'center',color:blue}}>Delete</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -48,7 +49,7 @@ class IndvDeck extends React.Component {
 const styles = StyleSheet.create({
 	title:{
 		textAlign:'center',
-		fontSize: 20,
+		fontSize: 30,
 		marginBottom: 20
 	},
 	button:{
@@ -68,6 +69,16 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		paddingLeft: 90,
 		paddingRight: 90
+	},
+	invertBtn:{
+		marginTop:40,
+		padding: 20,
+		backgroundColor: white,
+		width: 200,
+		alignSelf: 'center',
+		borderRadius: 4,
+		borderWidth: 2,
+		borderColor: blue
 	}
 })
 

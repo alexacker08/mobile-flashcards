@@ -4,10 +4,12 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, AsyncStorage } fr
 import {purple,blue,white} from '../utils/colors';
 import {getDecks,checkKey,DECK_STORAGE_KEY,addData,getDeck} from '../utils/helpers';
 import {appPull} from '../actions'
+import Swipeable from 'react-native-swipeable'
 
 function Card(props){
   const navigate = props.navoptions.navigate
   const cardselect = props.card
+
   return (
     <View style={styles.card}>
       <TouchableOpacity onPress={() => navigate('IndvDeck',{title:props.card.title})}>
@@ -24,8 +26,6 @@ class Deck extends React.Component {
   }
 
   componentDidMount(){
-    //appPull()
-    //getDecks().then(result => console.log(JSON.parse(result))
     this.props.dispatch(appPull())
     //AsyncStorage.clear()
   }
@@ -53,8 +53,6 @@ class Deck extends React.Component {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: purple,
-    borderWidth: 1,
-    borderColor: white,
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,

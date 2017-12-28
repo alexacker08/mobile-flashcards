@@ -17,7 +17,6 @@ class NewDeck extends React.Component {
 			text: ''
 		}
 	}
-
 	handleSubmit = () => {
 		if(this.state.text.length === 0){
 			return
@@ -33,7 +32,6 @@ class NewDeck extends React.Component {
 			})
 		}
 	}
-
 	deckBuilder = () => {
 		return {
 			[this.state.text]:{
@@ -42,10 +40,9 @@ class NewDeck extends React.Component {
 			}
 		}
 	}
-
 	render(){
 		return (
-			<View style={{flex: 1,backgroundColor:white,justifyContent:'center'}}>
+			<View style={{flex: 1,justifyContent:'center'}}>
 				<Text style={styles.title}>What is the title of your new deck</Text>
 				<TextInput
 					style={styles.textInput}
@@ -54,8 +51,9 @@ class NewDeck extends React.Component {
 				/>
 				<TouchableOpacity
 					onPress={this.handleSubmit}
+					style={styles.button}
 				>
-					<Text style={styles.button}>Submit</Text>
+					<Text style={styles.btnText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -66,27 +64,31 @@ const styles = StyleSheet.create({
 	title:{
 		textAlign:'center',
 		fontSize: 20,
-		marginBottom: 20
+		marginBottom: 40
 	},
 	button:{
-		textAlign:'center',
 		marginTop:40,
 		padding: 20,
 		backgroundColor: blue,
-		width: 200,
+		width: 225,
 		alignSelf: 'center',
-		color: white,
 		borderRadius: 4
+	},
+	btnText:{
+		textAlign:'center',
+		color: white
 	},
 	textInput:{
 		height: 50,
+		width: 275,
 		alignSelf:'center',
 		fontSize: 18,
 		borderRadius: 4,
 		borderColor: '#ccc',
 		borderWidth: 1,
-		paddingLeft: 90,
-		paddingRight: 90
+		paddingLeft: 40,
+		paddingRight: 40,
+		backgroundColor: white
 	}
 })
 

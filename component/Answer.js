@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity,Animated } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
+import {clearLocalNotification,setLocalNotification} from '../utils/helpers'
 import {NavigationActions} from 'react-navigation';
 
 
@@ -10,11 +11,17 @@ class Answer extends React.Component {
   		title:'Your Results'
   	}
 
-	_backtoHome = () => {
+  	componentDidMount(){
+  		clearLocalNotification().then(setLocalNotification)
+
+  	}
+
+	_backtoHome = (card) => {
 		const resetAction = NavigationActions.reset({
-			index:0,
+			index:1,
 			actions:[
-				NavigationActions.navigate({routeName: 'Home'})
+				NavigationActions.navigate({routeName: 'Home'}),
+				NavigationActions.navigate({routeName:'IndvDeck',params:{title:card.title}})
 			]
 		});
 		this.props.navigation.dispatch(resetAction)
@@ -45,7 +52,7 @@ class Answer extends React.Component {
 					<Text style={styles.btnText}>Restart</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={this._backtoHome}
+					onPress={() => this._backtoHome(card)}
 					style={styles.button}
 				>
 					<Text style={styles.btnText}>Back to my Cards</Text>
