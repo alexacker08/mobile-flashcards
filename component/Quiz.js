@@ -19,9 +19,11 @@ class Quiz extends React.Component {
 	_showModal = () => this.setState({modalVisible:true})
 	_hideModal = () => this.setState({modalVisible:false})
 
-	answerSubmit = (userAnswer,qAnswer) => {
+	answerSubmit = (userAnswer) => {
 		//let newIndex = this.state += 1;
-		let score = userAnswer === qAnswer ? 1 : 0
+		//let score = userAnswer === qAnswer ? 1 : 0
+		let score = userAnswer === 'Correct' ? 1 : 0
+
 		let newScore = this.state.score += score
 		let newIndex = this.state.questionIndex += 1
 
@@ -78,13 +80,13 @@ class Quiz extends React.Component {
 						<Text style={{textAlign:'center',fontSize: 20}}>Answer</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
-						onPress={() => this.answerSubmit('Correct',answer)}
+						onPress={() => this.answerSubmit('Correct')}
 						style={styles.button}
 					>
 						<Text style={styles.btnText}>Correct</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
-						onPress={() => this.answerSubmit('Incorrect',answer)}
+						onPress={() => this.answerSubmit('Incorrect')}
 						style={styles.button}
 					>
 						<Text style={styles.btnText}>Incorrect</Text>
@@ -108,7 +110,9 @@ const styles = StyleSheet.create({
 	title:{
 		textAlign:'center',
 		fontSize: 26,
-		marginBottom: 20
+		marginBottom: 20,
+		paddingLeft: 15,
+		paddingRight: 15
 	},
 	boldTitle:{
 		fontSize: 28,

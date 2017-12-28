@@ -11,19 +11,20 @@ class Question extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			text:'',
+			qText:'',
+			aText:''
 		}
 	}
 
-	_submitQuestion = (answer) => {
+	_submitQuestion = () => {
 		const currentQuestions = this.props.questionList
 		const newDeck = currentQuestions.length === 0 ? true : false
 		const cardTitle = this.props.navigation.state.params.title
 
 		//Builds new Question object that will be added to question array below
 		const newQuestion = {
-			question: this.state.text,
-			answer
+			question: this.state.qText,
+			answer: this.state.aText
 		}
 
 		//Add new question to previous question array
@@ -54,22 +55,19 @@ class Question extends React.Component {
 				<TextInput
 					style={styles.textInput}
 					placeholder="Enter Question Here"
-					onChangeText={(text) => this.setState({text})}
+					onChangeText={(text) => this.setState({qText:text})}
 				/>
-				<View style={{flexDirection:'row',justifyContent:'space-around'}}>
-					<TouchableOpacity
-						style={[styles.button,{marginRight:10}]}
-						onPress={() => this._submitQuestion('Correct')}
-					>
-						<Text style={styles.btnText}>Correct</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={[styles.button,{marginLeft:10}]}
-						onPress={() => this._submitQuestion('Incorrect')}
-					>
-						<Text style={styles.btnText}>Incorrect</Text>
-					</TouchableOpacity>
-				</View>
+				<TextInput
+					style={styles.textInput}
+					placeholder="Enter Answer Here"
+					onChangeText={(text) => this.setState({aText:text})}
+				/>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => this._submitQuestion()}
+				>
+					<Text style={styles.btnText}>Submit</Text>
+				</TouchableOpacity>
 			</View>
 		)
 	}
@@ -95,23 +93,23 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		borderRadius: 4,
 		borderColor: '#ccc',
-		borderWidth: 1,
+		borderWidth: 2,
 		paddingLeft: 40,
 		paddingRight: 40,
+		marginTop: 50,
 		color: '#000'
 	},
 	button:{
 		marginTop:40,
 		padding: 20,
-		backgroundColor: white,
-		borderWidth	: 2,
-		borderColor: purple,
+		backgroundColor: purple,
 		alignSelf: 'center',
 		borderRadius: 4,
-		width: 140
+		width: 240
 	},
 	btnText:{
-		textAlign:'center'
+		textAlign:'center',
+		color: white
 	}
 })
 

@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 ## App Overview
-Hey there! Seeing that you're now here, I thought I'd take a bit of your time to explain what the App is that you've stumbled up and how it can be useful to you. The underlying functionality of this App is to help users study for anything really that would require basic flashcards. Please note that the current quizzes are based on a simple "Correct" or "Incorrect" basis. More advanced updates to come out in future releases. The initial App also comes with "code" themed study cards as a starter however these can be erased and or added upon with ease.
+Hey there! Seeing that you're now here, I thought I'd take a bit of your time to explain what the App is that you've stumbled up and how it can be useful to you. The underlying functionality of this App is to help users study for anything really that would require basic flashcards. More advanced updates to come out in future releases. The initial App also comes with "code" themed study cards as a starter however these can be erased and or added upon with ease.
 
 ## Getting started
 
@@ -54,10 +54,10 @@ By clicking on an individual deck within the home screen, you'll be taken to the
 
 ### Adding a new flashcard to a deck
 
-To add a new question card, click "Add Card" which will take you to a simple fill in screen where you can input you question and answer if this statement is correct or not correct. After filling this out, you'll be taken back to the previous screen.
+To add a new question card, click "Add Card" which will take you to a simple fill in screen where you can input your question and answer.
 
 ### The Quiz
-When you start the quiz, you'll be shown statements and you must answer if they are correct or not. Once the quiz is complete, you'll be able to review your score where at that time. In the scoring screen, you'll also be given the option to retake the quiz or go back to the cards homepage.
+When you start the quiz, you'll be asked a question which you hopefully know or will eventually learn :). You can check the answer by clcking the "Answer" text which will bring a up a modal showing the respective answer. Once the quiz is complete, you'll be able to review your score where at that time. In the scoring screen, you'll also be given the option to retake the quiz or go back to the cards homepage.
 
 
 That's it. If you have any specific questions regarding the react setup of the project, I recommend you check out the create-react-native-app README documentation found in the link [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).

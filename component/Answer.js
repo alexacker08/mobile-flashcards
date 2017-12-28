@@ -42,7 +42,6 @@ class Answer extends React.Component {
 
 	render(){
 		const {score,card} = this.props.navigation.state.params
-		console.log(card.questions)
 		return(
 			<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
 				<Text style={styles.title}>You got {score} {score > 1 ? 'questions' : 'question'} right out of {card.questions.length}</Text>
@@ -51,13 +50,13 @@ class Answer extends React.Component {
 					onPress={() => this._backtoCards(card)}
 					style={styles.button}
 				>
-					<Text style={styles.btnText}>Restart</Text>
+					<Text style={styles.btnText}>Restart Quiz</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					onPress={() => this._backtoHome(card)}
 					style={styles.button}
 				>
-					<Text style={styles.btnText}>Back to my Cards</Text>
+					<Text style={styles.btnText}>Back to Deck</Text>
 				</TouchableOpacity>
 			</View>
 		)

@@ -11,10 +11,12 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 function Card(props){
   const navigate = props.navoptions.navigate
   const cardselect = props.card
+  const questionLength = cardselect.questions.length
   return (
     <View style={styles.card}>
       <TouchableOpacity onPress={() => navigate('IndvDeck',{title:props.card.title})}>
-      	<Text style={styles.cardText}>{props.card.title}</Text>
+      	<Text style={styles.cardText}>{cardselect.title}</Text>
+        <Text style={{color:white,textAlign:'center',paddingTop:10}}>{questionLength} {questionLength > 1 ? 'Cards' : 'Card'}</Text>
       </TouchableOpacity>
     </View>
   )

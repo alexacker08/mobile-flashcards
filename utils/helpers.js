@@ -90,31 +90,27 @@ export function setLocalNotification(){
 
 export function initialBuild(){
 	return 	{
-		'React':{
-			title:'React',
-			questions:[
-				{
-					question:'React is a JavaScript library',
-					answer:'Correct'
-				},
-				{
-					question:'JSX is used to write HTML in React',
-					answer:'Correct'
-				}
-			]
-		},
-		'JavaScript':{
-			title:'JavaScript',
-			questions:[
-				{
-					question:'ES6 is currently not accepted by all browsers',
-					answer:'Correct'
-				},
-				{
-					question:'Java and JavaScript are same language',
-					answer:'Incorrect'
-				}
-			]
-		}
+	  React: {
+	    title: 'React',
+	    questions: [
+	      {
+	        question: 'What is React?',
+	        answer: 'A library for managing user interfaces'
+	      },
+	      {
+	        question: 'Where do you make Ajax requests in React?',
+	        answer: 'The componentDidMount lifecycle event'
+	      }
+	    ]
+	  },
+	  JavaScript: {
+	    title: 'JavaScript',
+	    questions: [
+	      {
+	        question: 'What is a closure?',
+	        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+	      }
+	    ]
+	  }
 	}
 }
