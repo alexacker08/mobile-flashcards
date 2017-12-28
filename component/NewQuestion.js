@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity,TextInput } from 'react-native';
-import {purple,blue,white} from '../utils/colors';
-import {connect} from 'react-redux';
-import {addDeck,addQuestion} from '../actions';
-import {NavigationActions} from 'react-navigation';
-import {saveDeck} from '../utils/helpers'
+import { purple, blue, white } from '../utils/colors';
+import { connect } from 'react-redux';
+import { addDeck, addQuestion } from '../actions';
+import { NavigationActions } from 'react-navigation';
+import { saveDeck } from '../utils/api'
 
 class Question extends React.Component {
 

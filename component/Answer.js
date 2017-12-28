@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity,Animated } from 'react-native';
-import {purple,blue,white} from '../utils/colors';
-import {clearLocalNotification,setLocalNotification} from '../utils/helpers'
-import {NavigationActions} from 'react-navigation';
+import { purple, blue, white } from '../utils/colors';
+import { clearLocalNotification,setLocalNotification } from '../utils/notification'
+import { NavigationActions } from 'react-navigation';
 
 
 class Answer extends React.Component {

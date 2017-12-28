@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addCard,addDeck,addCarding} from '../actions';
+import { addCard, addDeck, addCarding } from '../actions';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity,TextInput } from 'react-native';
-import {purple,blue,white} from '../utils/colors';
-import {saveDeck} from '../utils/helpers'
+import { purple, blue, white } from '../utils/colors';
+import { saveDeck } from '../utils/api';
 
 class NewDeck extends React.Component {
 
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch,{navigation}){
 	return {
-		//addCard:(card) => dispatch(addCard(card)),
 		toCard:({questions,title}) => navigation.navigate('Question',{questions,title}),
 		dispatch:dispatch
 	}

@@ -1,5 +1,12 @@
-import {ADD_CARD,EDIT_CARD,ADD_QUESTION,FETCHING,FETCHING_COMP,DELETE_CARD} from '../actions'
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
+import {
+  ADD_CARD,
+  EDIT_CARD,
+  ADD_QUESTION,
+  FETCHING,
+  FETCHING_COMP,
+  DELETE_CARD
+} from '../actions'
 
 
 const fetch = {

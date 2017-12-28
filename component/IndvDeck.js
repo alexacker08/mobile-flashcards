@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
-import {purple,blue,white,gray} from '../utils/colors';
-import {deletingCard} from '../actions';
-import {FontAwesome, Ionicons} from '@expo/vector-icons';
+import { purple, blue, white, gray } from '../utils/colors';
+import { deletingCard } from '../actions';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 
 class IndvDeck extends React.Component {

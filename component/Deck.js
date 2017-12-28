@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native';
 import {purple,blue,white} from '../utils/colors';
-import {getDecks,checkKey,DECK_STORAGE_KEY,addData,getDeck} from '../utils/helpers';
 import {appPull} from '../actions'
 import Swipeable from 'react-native-swipeable'
 import { FontAwesome, Ionicons } from '@expo/vector-icons';

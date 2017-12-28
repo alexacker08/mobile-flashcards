@@ -1,13 +1,9 @@
 import {
 	getDecks,
-	getDeck,
-	saveDeckTitle,
-	addCard,
 	initialBuild,
 	addData,
-	saveDeck,
 	deleteDeckAPI
-} from '../utils/helpers'
+} from '../utils/api'
 
 export const ADD_CARD = 'ADD_CARD'
 export const EDIT_CARD = 'EDIT_CARD'

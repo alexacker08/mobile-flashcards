@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity,Animated } from 'react-native';
-import {purple,blue,white} from '../utils/colors';
+import { purple, blue, white } from '../utils/colors';
 import Modal from 'react-native-modal';
-import {NavigationActions} from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 
 class Quiz extends React.Component {
 

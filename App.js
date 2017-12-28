@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import {purple, blue, white, gray} from './utils/colors';
-import { getDecks, checkKey, DECK_STORAGE_KEY, addData, setLocalNotification} from './utils/helpers';
+import { setLocalNotification } from './utils/notification';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 const Tabs = TabNavigator({
