@@ -17,7 +17,7 @@ class Question extends React.Component {
 	}
 
 	_validateInput = () => {
-		if(this.state.qText.length > 0 && this.state.aText > 0){
+		if(this.state.qText.length > 0 && this.state.aText.length > 0){
 			return true
 		} else {
 			return false
