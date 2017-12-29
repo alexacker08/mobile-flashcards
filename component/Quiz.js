@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView,TouchableOpacity,Animated } from 're
 import { purple, blue, white } from '../utils/colors';
 import Modal from 'react-native-modal';
 import { NavigationActions } from 'react-navigation';
+import FlipCard from 'react-native-flip-card'
 
 class Quiz extends React.Component {
 
@@ -12,12 +13,12 @@ class Quiz extends React.Component {
 			numQuestions: 0,
 			questionIndex: 0,
 			score:0,
-			modalVisible:false
+			flipCard:false
 		}
 	}
 
-	_showModal = () => this.setState({modalVisible:true})
-	_hideModal = () => this.setState({modalVisible:false})
+	_showModal = () => this.setState({flipCard:true})
+	_hideModal = () => this.setState({flipCard:false})
 
 	answerSubmit = (userAnswer) => {
 		//let newIndex = this.state += 1;
@@ -34,7 +35,7 @@ class Quiz extends React.Component {
 		}
 
 		this.setState({
-			score:score,
+			score:newScore,
 			questionIndex:newIndex
 		})
 	}
@@ -68,39 +69,45 @@ class Quiz extends React.Component {
 		const currentQuestion = questions.length !== this.state.questionIndex ? questions[qIndex].question : ''
 
 		return (
-			<View style={{flex:1,justifyContent:'flex-start',backgroundColor:white}}>
-				<Text style={{textAlign:'left',marginBottom:50,marginTop:20,paddingLeft: 20,fontSize:18}}>{this.state.questionIndex + 1}/{questions.length}</Text>
-				<View>
-					<Text style={styles.title}>Question: {currentQuestion}</Text>
-					<TouchableOpacity
-						onPress={this._showModal}
-						style={{alignSelf:'center'}}
+			<View style={{flex: 1}}>
+				<FlipCard
+					style={{flex:1,backgroundColor:white,borderWidth:0}}
+					friction={6}
+					perspective={0}
+					clickable={false}
+					flip={this.state.flipCard}
+				>
+					<View style={{flex: 1,justifyContent:'flex-start'}}>
+						<Text style={{textAlign:'left',marginBottom:50,marginTop:20,paddingLeft: 20,fontSize:18}}>{this.state.questionIndex + 1}/{questions.length}</Text>
+						<Text style={styles.title}>Question: {currentQuestion}</Text>
+						<TouchableOpacity
+							onPress={() => this._showModal()}
+							style={{alignSelf:'center'}}
 
-					>
-						<Text style={{textAlign:'center',fontSize: 20}}>Answer</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => this.answerSubmit('Correct')}
-						style={styles.button}
-					>
-						<Text style={styles.btnText}>Correct</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => this.answerSubmit('Incorrect')}
-						style={styles.button}
-					>
-						<Text style={styles.btnText}>Incorrect</Text>
-					</TouchableOpacity>
-				</View>
-				<Modal isVisible={this.state.modalVisible}>
-					<View style={styles.modal}>
-						<Text style={styles.title}>The Answer is</Text>
-						<Text style={[styles.title,styles.boldTitle]}>{answer}</Text>
-						<TouchableOpacity onPress={this._hideModal} style={{alignSelf:'center'}}>
-							<Text style={{textAlign:'center'}}>Go Back</Text>
+						>
+							<Text style={{textAlign:'center',fontSize: 20}}>Answer</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							onPress={() => this.answerSubmit('Correct')}
+							style={styles.button}
+						>
+							<Text style={styles.btnText}>Correct</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							onPress={() => this.answerSubmit('Incorrect')}
+							style={styles.button}
+						>
+							<Text style={styles.btnText}>Incorrect</Text>
 						</TouchableOpacity>
 					</View>
-				</Modal>
+					<View style={{flex:1,justifyContent:'center'}}>
+						<Text style={styles.title}>The Answer is</Text>
+						<Text style={[styles.title,styles.boldTitle]}>{answer}</Text>
+						<TouchableOpacity style={styles.button} onPress={() => this._hideModal()}>
+							<Text style={styles.btnText}>Go Back</Text>
+						</TouchableOpacity>
+					</View>
+				</FlipCard>
 			</View>
 		)
 	}
@@ -142,12 +149,6 @@ const styles = StyleSheet.create({
 		paddingLeft: 90,
 		paddingRight: 90
 	},
-	modal:{
-		backgroundColor:white,
-		borderRadius: 5,
-		paddingTop: 15,
-		paddingBottom:15
-	}
 })
 
 export default Quiz

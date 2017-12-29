@@ -4,6 +4,7 @@ import { addCard, addDeck, addCarding } from '../actions';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity,TextInput } from 'react-native';
 import { purple, blue, white } from '../utils/colors';
 import { saveDeck } from '../utils/api';
+import { NavigationActions } from 'react-navigation';
 
 class NewDeck extends React.Component {
 
@@ -26,8 +27,8 @@ class NewDeck extends React.Component {
 			//Updates storage first with new deck of cards holder and then dispatches to update the store following the promise
 			saveDeck(title,emptyQ = []).then(() => {
 				this.props.dispatch(addCarding(cardObj))
-				this.props.toCard(cardObj[title])
 				this.setState({text:''})
+				this._toIndvView(title)
 			})
 		}
 	}
@@ -40,6 +41,18 @@ class NewDeck extends React.Component {
 			}
 		}
 	}
+	//Update the Navigation to reset so as to remove the back button being the "New Deck" comp
+	_toIndvView = (title) => {
+		const resetAction = NavigationActions.reset({
+			index: 1,
+			actions:[
+				NavigationActions.navigate({routeName:'Home'}),
+				NavigationActions.navigate({routeName:'IndvDeck',params:{title:title}})
+			]
+		})
+		this.props.navigation.dispatch(resetAction)
+	}
+
 	render(){
 		return (
 			<View style={{flex: 1,justifyContent:'center'}}>
@@ -96,7 +109,7 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch,{navigation}){
 	return {
-		toCard:({questions,title}) => navigation.navigate('Question',{questions,title}),
+		toCard:(title) => navigation.navigate('IndvDeck',{title:title}),
 		dispatch:dispatch
 	}
 }

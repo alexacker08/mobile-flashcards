@@ -2,21 +2,19 @@ import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 
 export const NOTIFICATION_KEY = 'StudyDeck:notifications'
-export function createLocalNotification(){
-	return {
-		title:'Don\'t forget to study!',
-		body: 'You haven\'t studied in over 24 hours! Be sure to study today!',
-		ios: {
-			sound: true,
-		},
-		android:{
-			sound: true,
-			priority: 'high',
-			stick: false,
-			vibrate: true
-		}
+export const createLocalNotification = () => ({
+	title:'Don\'t forget to study!',
+	body: 'You haven\'t studied in over 24 hours! Be sure to study today!',
+	ios: {
+		sound: true,
+	},
+	android:{
+		sound: true,
+		priority: 'high',
+		stick: false,
+		vibrate: true
 	}
-}
+})
 export function clearLocalNotification(){
 	return AsyncStorage.removeItem(NOTIFICATION_KEY)
 		.then(Notifications.cancelAllScheduledNotificationsAsync)
