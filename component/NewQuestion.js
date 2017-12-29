@@ -16,7 +16,18 @@ class Question extends React.Component {
 		}
 	}
 
+	_validateInput = () => {
+		if(this.state.qText.length > 0 && this.state.aText > 0){
+			return true
+		} else {
+			return false
+		}
+	}
+
 	_submitQuestion = () => {
+		if(!this._validateInput()){
+			return
+		}
 		const currentQuestions = this.props.questionList
 		const newDeck = currentQuestions.length === 0 ? true : false
 		const cardTitle = this.props.navigation.state.params.title

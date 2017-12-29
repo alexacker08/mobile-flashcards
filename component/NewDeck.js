@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { addCard, addDeck, addCarding } from '../actions';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity,TextInput } from 'react-native';
-import { purple, blue, white } from '../utils/colors';
+import { purple, blue, white, lightGray } from '../utils/colors';
 import { saveDeck } from '../utils/api';
 import { NavigationActions } from 'react-navigation';
 
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 		alignSelf:'center',
 		fontSize: 18,
 		borderRadius: 4,
-		borderColor: '#ccc',
+		borderColor: lightGray,
 		borderWidth: 1,
 		paddingLeft: 40,
 		paddingRight: 40,
