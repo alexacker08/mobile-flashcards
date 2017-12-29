@@ -61,3 +61,20 @@ When you start the quiz, you'll be asked a question which you hopefully know or 
 
 
 That's it. If you have any specific questions regarding the react setup of the project, I recommend you check out the create-react-native-app README documentation found in the link [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+
+## Credits
+
+Numerous external libraries and utilities were used in the making of this project. Please see below for a complete list
+
+[React Native Flip Card](https://www.npmjs.com/package/react-native-flip-card)
+[React Native Swipeable](https://www.npmjs.com/package/react-native-swipeable)
+[React Native](https://facebook.github.io/react-native/)
+[React Navigation](https://www.npmjs.com/package/react-navigation)
+[React](https://www.npmjs.com/package/react)
+[Redux](https://www.npmjs.com/package/redux)
+[Redux Thunk](https://www.npmjs.com/package/redux-thunk)
+[Expo](https://www.npmjs.com/package/expo)
+
+## License
+
+MIT
